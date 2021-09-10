@@ -1,5 +1,7 @@
 use core::{cmp::Ordering, ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign}};
 
+use rand::distributions::uniform::SampleUniform;
+
 
 pub enum Arithmetic {
     Add,
@@ -48,7 +50,7 @@ pub trait Number: Sized+Default+Clone+Copy+
                     Mul<Self, Output = Self>+
                     AddAssign<Self> + SubAssign<Self>+
                     MulAssign<Self> + DivAssign<Self>+
-                    PartialOrd+ PartialEq +
+                    PartialOrd+ PartialEq + SampleUniform +
                     'static + core::fmt::Debug + core::fmt::Display + {
 
         fn from_usize(value: usize) -> Self;

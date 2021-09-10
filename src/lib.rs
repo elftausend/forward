@@ -28,6 +28,12 @@ fn math() {
     let out = Forward::<_, 3, 2>::forward(&x, &y);
     
     println!("out: {:?}", out);
-
     
+}
+
+#[test]
+fn layer() {
+    let layer = Linear::<f32, 3, 3>::rand();
+    println!("layer: {:?}", layer);
+
 }
