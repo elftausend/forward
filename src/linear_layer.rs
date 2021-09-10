@@ -1,6 +1,6 @@
 use rand::Rng;
 
-use crate::Float;
+use crate::{Float, Forward};
 
 
 #[derive(Debug)]
@@ -21,5 +21,8 @@ impl <T: Float, const I: usize, const O: usize>Linear<T, I, O> where [T; I*O]: {
             *value  = rng.gen_range(T::one().negate()..T::one());
         }
         Linear::new(weights)
+    }
+    pub fn forward(&self, input: &[T; I]) -> [T; O] {
+        Forward::<_, I, O>::forward(input, &self.weights)
     }
 }

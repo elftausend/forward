@@ -35,5 +35,8 @@ fn math() {
 fn layer() {
     let layer = Linear::<f32, 3, 3>::rand();
     println!("layer: {:?}", layer);
+    let input = [3., 1., 6.,];
+
+    layer.forward(&input);
 
 }
