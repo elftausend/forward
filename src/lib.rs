@@ -1,4 +1,6 @@
+#![allow(incomplete_features)]
 #![feature(generic_const_exprs)]
+
 mod array_math;
 use std::time::Instant;
 
@@ -9,6 +11,9 @@ pub use number::*;
 
 mod linear_layer;
 pub use linear_layer::*;
+
+mod activation;
+pub use activation::*;
 
 #[test]
 fn math() {
@@ -33,10 +38,27 @@ fn math() {
 
 #[test]
 fn layer() {
-    let layer = Linear::<f32, 3, 3>::rand();
-    println!("layer: {:?}", layer);
-    let input = [3., 1., 6.,];
+    let layer = Linear::<f32, ReLU, 1, 64>::rand();
+    let layer1 = Linear::<f32, ReLU, 64, 64>::rand();
+    let layer2 = Linear::<f32, ReLU, 64, 1>::rand();
 
-    layer.forward(&input);
+    let input = [0.13,];
+
+    let before = Instant::now();
+
+    for _ in 0..1_000_000 {
+        let x = layer.forward(&input);
+        let x = layer1.forward(&x);
+        let out = layer2.forward(&x);    
+    }
+
+    let after = Instant::now();
+    println!("dur: {:?}", after-before);
+
+    let x = layer.forward(&input);
+    let x = layer1.forward(&x);
+    let out = layer2.forward(&x);
+
+    println!("out: {:?}", out);
 
 }

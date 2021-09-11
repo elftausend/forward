@@ -110,6 +110,9 @@ macro_rules! float_apply {
             fn as_usize(&self) -> usize {
                 *self as usize
             }
+            fn max(&self, x: Self) -> Self {
+                $t::max(*self, x)
+            }
 
         }
     };
@@ -147,6 +150,7 @@ pub trait Float: Sized+Default+Clone+Copy+
     fn ln(&self) -> Self;
     fn abs(&self) -> Self;
     fn as_usize(&self) -> usize;
+    fn max(&self, x: Self) -> Self;
 }
 
 
