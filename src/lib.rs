@@ -25,12 +25,12 @@ fn math() {
     let before = Instant::now();
 
     for _ in 0..1_000_000 {
-        let out = Forward::<_, 3, 2>::forward(&x, &y);
+        let out = Forward::<_, 3, 2,>::forward(&x, &y);
     }
     
     let after = Instant::now();
     println!("dur: {:?}", after-before);
-    let out = Forward::<_, 3, 2>::forward(&x, &y);
+    let out = Forward::<_, 3, 2, >::forward(&x, &y);
     
     println!("out: {:?}", out);
     

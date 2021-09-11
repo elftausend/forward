@@ -1,6 +1,6 @@
-use crate::Number;
+use crate::{Number, TActivation};
 
-pub trait Forward<T, const C: usize, const C2: usize> {
+pub trait Forward<T, const C: usize, const C2: usize, > {
     fn forward(&self, rhs: &[T; C*C2]) -> [T; C2];
 }
 pub trait Transpose<T, const R: usize, const C: usize> {

@@ -1,22 +1,24 @@
-use crate::Float;
+use crate::{Float, Number};
 
 
-pub trait TActivation<T: Float> {
-    fn compute(x: &mut T) -> T;
+pub trait TActivation<T> {
+    fn compute(x: &T) -> T;
 }
 
 pub struct ReLU;
 
 impl <T: Float>TActivation<T> for ReLU {
-    fn compute(x: &mut T) -> T {
+    #[inline]
+    fn compute(x: &T) -> T {
         x.max(T::default())
     }
 }
 
-pub struct NoAct;
+pub struct None;
 
-impl <T: Float>TActivation<T> for NoAct {
-    fn compute(x: &mut T) -> T {
+impl <T: Number>TActivation<T> for None {
+    #[inline]
+    fn compute(x: &T) -> T {
         *x
     }
 }
