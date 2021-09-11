@@ -25,6 +25,15 @@ impl <T: Float>TActivation<T> for Sigmoid {
     }
 }
 
+pub struct Tanh;
+
+impl <T: Float>TActivation<T> for Tanh {
+    #[inline]
+    fn compute(x: &T) -> T {
+        x.tanh()
+    }
+}
+
 pub struct None;
 
 impl <T: Number>TActivation<T> for None {
