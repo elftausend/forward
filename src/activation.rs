@@ -60,3 +60,8 @@ impl <T: Float, const C: usize>Softmax<T, C> {
     }
 }
 
+impl<T: Float, const C: usize> Default for Softmax<T, C> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
