@@ -59,3 +59,4 @@ impl <T: Float, const C: usize>Softmax<T, C> {
         exp.map(|x| x/sum)
     }
 }
+

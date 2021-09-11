@@ -1,3 +1,2 @@
 
-mod sine_net;
-pub use sine_net::*;
+pub mod sine_net;

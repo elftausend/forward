@@ -2,7 +2,6 @@
 #![feature(generic_const_exprs)]
 
 mod array_math;
-use std::time::Instant;
 
 pub use array_math::*;
 
@@ -18,7 +17,11 @@ pub use activation::*;
 mod nets;
 pub use nets::*;
 
-#[test]
+mod tests {
+    use std::time::Instant;
+
+    use crate::{Forward, Linear, None, ReLU, Softmax, sine_net::{SINE_LAYER0, SINE_LAYER1, SINE_LAYER2}};
+    #[test]
 fn math() {
     let x = [2, 1, 3];
     let y = [3, 1,
@@ -107,3 +110,5 @@ fn mnist() {
     let x = softmax.forward(&x);
     println!("x: {:?}", x);
 }
+}
+
