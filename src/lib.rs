@@ -70,9 +70,9 @@ fn layer() {
 #[test]
 fn sine_net() {
     
-    let l = Linear::<f32, ReLU, 1, 64>::new(LAYER0);
-    let l1 = Linear::<f32, ReLU, 64, 64>::new(LAYER1);
-    let l2 = Linear::<f32, ReLU, 64, 1>::new(LAYER2);
+    let l = Linear::<f32, ReLU, 1, 64>::new(SINE_LAYER0);
+    let l1 = Linear::<f32, ReLU, 64, 64>::new(SINE_LAYER1);
+    let l2 = Linear::<f32, ReLU, 64, 1>::new(SINE_LAYER2);
 
     let input = [0.3];
 
