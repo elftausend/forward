@@ -16,6 +16,15 @@ impl <T: Float>TActivation<T> for ReLU {
     }
 }
 
+pub struct Sigmoid;
+
+impl <T: Float>TActivation<T> for Sigmoid {
+    #[inline]
+    fn compute(x: &T) -> T {
+        T::one() / (T::one() + x.negate().exp())
+    }
+}
+
 pub struct None;
 
 impl <T: Number>TActivation<T> for None {
