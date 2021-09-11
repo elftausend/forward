@@ -15,6 +15,9 @@ pub use linear_layer::*;
 mod activation;
 pub use activation::*;
 
+mod nets;
+pub use nets::*;
+
 #[test]
 fn math() {
     let x = [2, 1, 3];
@@ -38,27 +41,69 @@ fn math() {
 
 #[test]
 fn layer() {
-    let layer = Linear::<f32, ReLU, 1, 64>::rand();
-    let layer1 = Linear::<f32, ReLU, 64, 64>::rand();
-    let layer2 = Linear::<f32, ReLU, 64, 1>::rand();
+    let l = Linear::<f32, ReLU, 1, 64>::rand();
+    let l1 = Linear::<f32, ReLU, 64, 64>::rand();
+    let l2 = Linear::<f32, ReLU, 64, 1>::rand();
 
     let input = [0.13,];
 
     let before = Instant::now();
 
     for _ in 0..1_000_000 {
-        let x = layer.forward(&input);
-        let x = layer1.forward(&x);
-        let out = layer2.forward(&x);    
+        let x = l.forward(&input);
+        let x = l1.forward(&x);
+        let out = l2.forward(&x);    
     }
 
     let after = Instant::now();
     println!("dur: {:?}", after-before);
 
-    let x = layer.forward(&input);
-    let x = layer1.forward(&x);
-    let out = layer2.forward(&x);
+    let x = l.forward(&input);
+    let x = l1.forward(&x);
+    let out = l2.forward(&x);
 
     println!("out: {:?}", out);
 
+}
+
+
+#[test]
+fn sine_net() {
+    
+    let l = Linear::<f32, ReLU, 1, 64>::new(LAYER0);
+    let l1 = Linear::<f32, ReLU, 64, 64>::new(LAYER1);
+    let l2 = Linear::<f32, ReLU, 64, 1>::new(LAYER2);
+
+    let input = [0.3];
+
+    let x = l.forward(&input);
+    let x = l1.forward(&x);
+    let x = l2.forward(&x);
+
+    println!("predicted: {:?}", x);
+}
+
+#[test]
+fn mnist() {
+    let l = Linear::<f32, ReLU, 784, 10>::rand();
+    let l1 = Linear::<f32, None, 10, 10>::rand();
+    let softmax = Softmax::<f32, 10>::new();
+
+    let input = [0.5; 28*28];
+
+    let before = Instant::now();
+
+    for _ in 0..100_000 {
+        let x = l.forward(&input);
+        let x = l1.forward(&x);
+        let _ = softmax.forward(&x);
+    }
+
+    let after = Instant::now();
+    println!("dur: {:?}", after-before);
+    
+    let x = l.forward(&input);
+    let x = l1.forward(&x);
+    let x = softmax.forward(&x);
+    println!("x: {:?}", x);
 }

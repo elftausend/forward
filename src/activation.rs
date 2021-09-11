@@ -1,4 +1,6 @@
-use crate::{Float, Number};
+use std::marker::PhantomData;
+
+use crate::{Float, Number, Sum};
 
 
 pub trait TActivation<T> {
@@ -20,5 +22,22 @@ impl <T: Number>TActivation<T> for None {
     #[inline]
     fn compute(x: &T) -> T {
         *x
+    }
+}
+
+pub struct Softmax<T, const C: usize> {
+    _pd: PhantomData<T>
+}
+
+impl <T: Float, const C: usize>Softmax<T, C> {
+    pub fn new() -> Softmax<T, C> {
+        Softmax {
+            _pd: PhantomData
+        }
+    }
+    pub fn forward(&self, input: &[T; C]) -> [T; C] {
+        let exp: [T; C] = input.map(|x| x.exp());
+        let sum = Sum::<T, C>::compute(&exp);
+        exp.map(|x| x/sum)
     }
 }

@@ -2,7 +2,7 @@ use core::marker::PhantomData;
 
 use rand::Rng;
 
-use crate::{Float, Forward, TActivation, activation};
+use crate::{Float, Forward, TActivation};
 
 
 #[derive(Debug)]

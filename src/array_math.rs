@@ -1,4 +1,18 @@
-use crate::{Number, TActivation};
+use crate::{Number};
+
+pub trait Sum<T, const SIZE: usize> {
+    fn compute(&self) -> T;
+}
+
+impl <T: Number, const SIZE: usize>Sum<T,SIZE> for [T; SIZE] {
+    fn compute(&self) -> T {
+        let mut sum = T::default();
+        for value in self {
+            sum += *value;
+        }
+        sum
+    }
+}
 
 pub trait Forward<T, const C: usize, const C2: usize, > {
     fn forward(&self, rhs: &[T; C*C2]) -> [T; C2];
