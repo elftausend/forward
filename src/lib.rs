@@ -11,8 +11,7 @@ pub use number::*;
 mod linear_layer;
 pub use linear_layer::*;
 
-mod activation;
-pub use activation::*;
+pub mod activation;
 
 mod nets;
 pub use nets::*;
@@ -20,7 +19,7 @@ pub use nets::*;
 mod tests {
     use std::time::Instant;
 
-    use crate::{Forward, Linear, None, ReLU, Softmax, sine_net::{SINE_LAYER0, SINE_LAYER1, SINE_LAYER2}};
+    use crate::{Forward, Linear, activation::{ReLU, Softmax, None}, sine_net::{SINE_LAYER0, SINE_LAYER1, SINE_LAYER2}};
     #[test]
 fn math() {
     let x = [2, 1, 3];
