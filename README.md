@@ -38,21 +38,20 @@ This is a neural network, which was trained to fit a sine wave.
 
 ```rust
 
-use forward::{Linear, activation::{None, ReLU}, sine_net::{SINE_LAYER0, SINE_LAYER1, SINE_LAYER2}};
+use forward::{Linear, activation::{None, ReLU}, sine_net::{BIAS1, BIAS2, BIAS3, LAYER1, LAYER2, LAYER3}};
 
 fn main() {
-    let linear = Linear::<f32, ReLU, 1, 64>::new(SINE_LAYER0);
-    let linear1 = Linear::<f32, ReLU, 64, 64>::new(SINE_LAYER1);
-    let linear2 = Linear::<f32, None, 64, 1>::new(SINE_LAYER2);
+    let linear1 = Linear::<f32, ReLU, 1, 64>::new(LAYER1, BIAS1);
+    let linear2 = Linear::<f32, ReLU, 64, 64>::new(LAYER2, BIAS2);
+    let linear3 = Linear::<f32, None, 64, 1>::new(LAYER3, BIAS3);
 
     let input = [0.555];
     
-    let x = linear.forward(&input);
-    let x = linear1.forward(&x);
+    let x = linear1.forward(&input);
     let x = linear2.forward(&x);
+    let x = linear3.forward(&x);
 
     println!("predicted: {:?}", x);
-    
 }
 
 ```
