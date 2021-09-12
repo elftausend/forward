@@ -32,3 +32,27 @@ fn main() {
 }
 ```
 
+## Example neural network
+
+This is a neural network, which was trained to fit a sine wave.
+
+```rust
+
+use forward::{Linear, activation::{None, ReLU}, sine_net::{SINE_LAYER0, SINE_LAYER1, SINE_LAYER2}};
+
+fn main() {
+    let linear = Linear::<f32, ReLU, 1, 64>::new(SINE_LAYER0);
+    let linear1 = Linear::<f32, ReLU, 64, 64>::new(SINE_LAYER1);
+    let linear2 = Linear::<f32, None, 64, 1>::new(SINE_LAYER2);
+
+    let input = [0.555];
+    
+    let x = linear.forward(&input);
+    let x = linear1.forward(&x);
+    let x = linear2.forward(&x);
+
+    println!("predicted: {:?}", x);
+    
+}
+
+```
