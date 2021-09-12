@@ -8,13 +8,16 @@ use crate::{Float, Forward, activation::TActivation};
 #[derive(Debug)]
 pub struct Linear<T: Float, A: TActivation<T>, const I: usize, const O: usize> where [T; I*O]: {
     pub weights: [T; I*O],
+    pub bias: [T; O],
     _pd: PhantomData<A>,
 }
 
 impl <T: Float, A: TActivation<T>,const I: usize, const O: usize>Linear<T, A, I, O> where [T; I*O]: {
     pub fn new(weights: [T; I*O]) -> Linear<T, A, I, O> {
+        let bias = [T::default(); O];
         Linear {
             weights,
+            bias,
             _pd: PhantomData
         }
     }
