@@ -19,7 +19,7 @@ pub use nets::*;
 mod tests {
     use std::time::Instant;
 
-    use crate::{Forward, Linear, activation::{ReLU, Softmax, None}, sine_net::{SINE_LAYER0, SINE_LAYER1, SINE_LAYER2}};
+    use crate::{Forward, Linear, activation::{ReLU, Softmax, None}, sine_net::{BIAS1, BIAS2, BIAS3, LAYER1, LAYER2, LAYER3}, sine_net_old::{SINE_LAYER0, SINE_LAYER1, SINE_LAYER2}};
     #[test]
     fn math() {
         let x = [2, 1, 3];
@@ -72,15 +72,15 @@ mod tests {
     #[test]
     fn sine_net() {
         
-        let l = Linear::<f32, ReLU, 1, 64>::new(SINE_LAYER0);
-        let l1 = Linear::<f32, ReLU, 64, 64>::new(SINE_LAYER1);
-        let l2 = Linear::<f32, ReLU, 64, 1>::new(SINE_LAYER2);
+        let l1 = Linear::<f32, ReLU, 1, 64>::new(LAYER1, BIAS1);
+        let l2 = Linear::<f32, ReLU, 64, 64>::new(LAYER2, BIAS2);
+        let l3 = Linear::<f32, ReLU, 64, 1>::new(LAYER3, BIAS3);
 
         let input = [0.3];
 
-        let x = l.forward(&input);
-        let x = l1.forward(&x);
+        let x = l1.forward(&input);
         let x = l2.forward(&x);
+        let x = l3.forward(&x);
 
         println!("predicted: {:?}", x);
     }
