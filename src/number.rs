@@ -3,15 +3,6 @@ use core::{cmp::Ordering, ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, 
 use rand::distributions::uniform::SampleUniform;
 
 
-pub enum Arithmetic {
-    Add,
-    Sub,
-    Mul,
-    Div,
-    //..
-
-}
-
 macro_rules! number_apply {
     ($t:ident) => {
         impl Number for $t {

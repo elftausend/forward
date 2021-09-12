@@ -1,3 +1,6 @@
 # forward
 
-Forward-only neural network library
+A feed-forward-only neural network library written in Rust, which uses fixed-size arrays.
+
+## Operations
+
