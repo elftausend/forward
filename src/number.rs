@@ -9,12 +9,6 @@ macro_rules! number_apply {
             fn from_usize(value: usize) -> $t {
                 value as $t
             }
-            /* 
-            fn one() -> $t {
-                1 as $t
-            }
-            */
-
         }
     };
 }
