@@ -29,7 +29,7 @@ number_apply!(u128);
 number_apply!(usize);
 
 pub trait Number: Sized+Default+Clone+Copy+
-                    Add<Self, Output = Self>+
+                    core::ops::Add<Self, Output = Self>+
                     Sub<Self, Output = Self>+
                     Div<Self, Output = Self>+
                     Mul<Self, Output = Self>+

@@ -1,6 +1,6 @@
 use std::time::Instant;
 
-use forward::{Forward, Linear, activation::{ReLU, Softmax, None}, sine_net::{BIAS1, BIAS2, BIAS3, LAYER1, LAYER2, LAYER3}, sine_net_old::{SINE_LAYER0, SINE_LAYER1, SINE_LAYER2}};
+use forward::{Forward, Linear, activation::{ReLU, Softmax, None}, sine_net::{BIAS1, BIAS2, BIAS3, LAYER1, LAYER2, LAYER3}, };
 #[test]
 fn math() {
     let x = [2, 1, 3];
@@ -57,7 +57,7 @@ fn sine_net() {
     let l2 = Linear::<f32, ReLU, 64, 64>::new(LAYER2, BIAS2);
     let l3 = Linear::<f32, None, 64, 1>::new(LAYER3, BIAS3);
 
-    let input = [0.201];
+    let input = [90. * (std::f32::consts::PI/180.)];
 
     let x = l1.forward(&input);
     let x = l2.forward(&x);
